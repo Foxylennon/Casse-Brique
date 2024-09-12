@@ -11,7 +11,7 @@ pygame.display.set_caption("Made in Heaven")
 screen = pygame.display.set_mode((0,0))
 screen_width , screen_height = screen.get_size() 
 
-git 
+
 screen_state = "main"   #main, game, options
 
 background = Background('background_img.png', [0,0])
