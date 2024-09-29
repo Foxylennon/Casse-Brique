@@ -3,18 +3,23 @@ from pygame import*
 from math import*
 
 
-clock = time.Clock()
-
 #button class
 class Button():
-    def __init__(self,x,y,image,image2, scale) -> None:
-        width = image.get_width()
-        height = image.get_height()
-        self.image = pygame.transform.scale(image, (int(width * scale),int(height * scale)))
-        self.image2 = pygame.transform.scale(image2, (int(width * scale),int(height * scale)))
+    def __init__(self, x, y, image, image2, scale, screen_width) -> None:
+        # Calculate dynamic width as a percentage of screen width (e.g., 10%)
+        button_width = screen_width * scale
+        button_height = button_width * (image.get_height() / image.get_width())  # Keep aspect ratio
+
+        # Scale images
+        self.image = pygame.transform.scale(image, (int(button_width), int(button_height)))
+        self.image2 = pygame.transform.scale(image2, (int(button_width), int(button_height)))
         self.rect = self.image.get_rect()
-        self.rect.topleft = (x,y)
+        self.rect.topleft = (x, y)
         self.clicked = False
+
+    def set_position(self, x, y):
+        #Update the button's position dynamically
+        self.rect.topleft = (x, y)
 
     #draw button 
     def draw(self,surface):
